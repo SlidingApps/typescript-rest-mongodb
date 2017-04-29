@@ -1,0 +1,33 @@
+{
+  "name": "typescript-rest-passport",
+  "version": "1.0.0",
+  "description": "rest service using typescript-rest + passport",
+  "scripts": {
+    "start": "npm run build && nodemon --delay 3 ./dist/server.js",
+    "build": "npm run build:dev",
+    "build:dev": "npm run clean && tsc",
+    "build:prd": "npm run clean && npm run lint && tsc",
+    "lint": "tslint ./src/**/*.ts",
+    "clean": "rimraf dist"
+  },
+  "author": "Peter VYVEY <peter.vyvey@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.14.0",
+    "fluent-ts-validator": "^1.1.0",
+    "passport": "~0.3.0",
+    "passport-http": "~0.3.0",
+    "typescript-ioc": "~0.4.0",
+    "typescript-rest": "~0.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "~4.0.0",
+    "@types/node": "~6.0.0",
+    "ncp": "~2.0.0",
+    "nodemon": "~1.11.0",
+    "rimraf": "~2.5.0",
+    "tslint": "~3.11.0",
+    "typescript": "~2.2.0",
+    "typings": "~2.1.0"
+  }
+}
