@@ -13,9 +13,8 @@ export class ProjectByIDValidator extends AbstractValidator<ProjectByID> {
             .isNotNull()
             .isNotEmpty();
 
-        this.validateIf(x => x.projectID)
+        this.validateIfString(x => x.projectID)
             .isNotNull()
-            .isNotEmpty()
-            .isNotEqualTo(0);
+            .isNotEmpty();
     }
 }

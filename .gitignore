@@ -31,6 +31,9 @@ dist
 node_modules
 jspm_packages
 
+#application configuration + dev connectionstring etc.
+src/config/application-config.json
+
 # Optional npm cache directory
 .npm
 
