@@ -22,5 +22,5 @@ if (Configuration.IS_PRODUCTION) {
 
 app.listen(3000, () => {
     /* tslint:disable-next-line */
-    console.log('REST server listening on port 3000!');
+    console.log('REST server listening on port 3000');
 });
