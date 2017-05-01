@@ -3,7 +3,6 @@ import * as express from 'express';
 import { ContextRequest, Path, PathParam, Return, GET, PUT } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import { Response } from '../../foundation';
 import { Version } from './version';
 import { Project } from '../domain';
 
