@@ -23,8 +23,7 @@
     ],
     "member-ordering": [
       "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
+      "static-before-instance"
     ],
     "no-angle-bracket-type-assertion": false,
     "no-any": false,
