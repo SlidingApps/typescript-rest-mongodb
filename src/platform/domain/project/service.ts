@@ -57,17 +57,12 @@ export class Service {
   }
 
   public create(command: Command.Command<Intent.CreatePoject>): Promise<Entity.Project> {
-    const attributes: Project.IProjectAttributes = {
-      projectID: Foundation.Generator.uuid(),
-      tenantID: command.tenantID,
-      name: command.intent.name,
-      timestamp: new Date()
-    };
+    const project: Entity.Project = Entity.Project.Create(Foundation.Generator.uuid(), command.tenantID, command.intent.name);
 
     const promise: Promise<Representation.IProject> = 
       new Promise<Entity.Project>((resolve, reject) => {
         this.repostory
-          .create(attributes, (error, document) => 
+          .create(project.$$getData(), (error, document) => 
               resolve(Action.Result(new Entity.Project(document), error)));
       });
 

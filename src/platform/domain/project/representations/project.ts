@@ -13,13 +13,15 @@ export interface IProjectCollection extends Foundation.ICollectionRepresentation
     projects: Array<IProject>;
 }
 
+@Foundation.HalSerialization.Serializable
 export class Project extends Foundation.DataRepresentation implements IProject {
     
     constructor(private $$data: ProjectPersistence.IProjectDocument) { 
         super();
     }
 
-    public get id(): string { return this.$$data.projectID; }
+    @Foundation.HalSerialization.Property()
+    public get id(): string { return this.$$data.id as string; }
 
     public get tenantID(): string { return this.$$data.tenantID; }
 

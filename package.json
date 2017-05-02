@@ -19,6 +19,7 @@
     "mongoose": "^4.9.6",
     "passport": "~0.3.0",
     "passport-http": "~0.3.0",
+    "reflect-metadata": "^0.1.10",
     "typescript-ioc": "~0.4.0",
     "typescript-rest": "~0.4.0"
   },

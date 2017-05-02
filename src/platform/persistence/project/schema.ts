@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 import { IProjectDocument } from './project-document';
 
 const schema = new mongoose.Schema({
-    projectID: String,
+    id: String,
     tenantID: { type: String, required: true, unique: false },
     name: { type: String, required: true, unique: true },
     timestamp: Date

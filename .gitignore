@@ -33,6 +33,7 @@ dist
 # Dependency directories
 node_modules
 jspm_packages
+typings
 
 #application configuration + dev connectionstring etc.
 src/config/application-config.json
