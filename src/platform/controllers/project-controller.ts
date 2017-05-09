@@ -28,8 +28,9 @@ export class ProjectController {
     public get(@PathParam('tenantid') tenantID: string, @PathParam('id') projectID: string, @ContextRequest request: express.Request): Promise<Project.Representation.IProject> {
         const query: Project.Query.ProjectByID =  new Project.Query.ProjectByID(tenantID, projectID);
 
+        const isHalContentType: boolean = this.isHalContentType(request);
         return this.service.get(query)
-            .then(x => this.mapper.map(Configuration.APPLICATION_CONFIG.apiBaseUrl, x));
+            .then(x => this.mapper.map(Configuration.APPLICATION_CONFIG.apiBaseUrl, x, isHalContentType));
     }
 
     @Path('')
@@ -39,6 +40,10 @@ export class ProjectController {
 
         return this.service.create(command)
             .then(x => new Return.NewResource(request.url + '/' + x.id, { id: x.id }));
+    }
+
+    private isHalContentType(request: express.Request): boolean {
+        return !!request && !!request.header('content-type') && request.header('content-type') === 'application/hal+json';
     }
 
 }
