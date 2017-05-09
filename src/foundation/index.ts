@@ -1,4 +1,4 @@
-import * as HalSerialization from './hal-serialization';
+import * as Hal from './hal-resource';
 
 export * from './command';
 export * from './intent'
@@ -11,4 +11,4 @@ export * from './generator';
 export * from './action';
 export * from './with-identifier';
 
-export { HalSerialization }
+export { Hal }

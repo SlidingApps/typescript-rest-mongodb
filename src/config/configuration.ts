@@ -1,5 +1,6 @@
 
 export interface IApplicationConfig {
+    apiBaseUrl: string;
     db: IDatabaseConfig;
 }
  

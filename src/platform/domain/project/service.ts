@@ -46,7 +46,7 @@ export class Service {
       new Promise<Representation.IProject>((resolve, reject) => {
 
         this.repostory
-          .findOne({ tenantID: query.tenantID, projectID: query.projectID })
+          .findOne({ tenantID: query.tenantID, id: query.projectID })
           .exec((error, document) => Action.Result(document, error))
           .then(document => new Representation.Project(document) as Representation.IProject)
           .then(representation => resolve(representation));

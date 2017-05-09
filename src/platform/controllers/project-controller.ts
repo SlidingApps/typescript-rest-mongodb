@@ -1,7 +1,10 @@
 
 import * as express from 'express';
-import { ContextRequest, Path, PathParam, Return, GET, PUT } from 'typescript-rest';
+import { ContextRequest, Path, PathParam, Return, ServiceContext, GET, PUT } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
+
+import { Configuration } from '../../config/configuration';
+import * as Hal from '../../foundation/hal-resource';
 
 import { Version } from './version';
 import { Project } from '../domain';
@@ -9,7 +12,8 @@ import { Project } from '../domain';
 @Path(`/${Version.API}/:tenantid/projects/`)
 export class ProjectController {
 
-    constructor(@Inject private service: Project.Service) { }
+    constructor(@Inject private service: Project.Service, @Inject private mapper: Hal.Mapper) { 
+    }
 
     @Path('')
     @GET
@@ -21,10 +25,11 @@ export class ProjectController {
 
     @Path('/:id')
     @GET
-    public get(@PathParam('tenantid') tenantID: string, @PathParam('id') projectID: string): Promise<Project.Representation.IProject> {
+    public get(@PathParam('tenantid') tenantID: string, @PathParam('id') projectID: string, @ContextRequest request: express.Request): Promise<Project.Representation.IProject> {
         const query: Project.Query.ProjectByID =  new Project.Query.ProjectByID(tenantID, projectID);
 
-        return this.service.get(query);
+        return this.service.get(query)
+            .then(x => this.mapper.map(Configuration.APPLICATION_CONFIG.apiBaseUrl, x));
     }
 
     @Path('')

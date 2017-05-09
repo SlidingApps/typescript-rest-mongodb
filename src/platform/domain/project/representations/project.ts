@@ -13,21 +13,24 @@ export interface IProjectCollection extends Foundation.ICollectionRepresentation
     projects: Array<IProject>;
 }
 
-@Foundation.HalSerialization.Serializable
+@Foundation.Hal.HalResource(':tenantID/project/:id')
 export class Project extends Foundation.DataRepresentation implements IProject {
     
     constructor(private $$data: ProjectPersistence.IProjectDocument) { 
         super();
     }
 
-    @Foundation.HalSerialization.Property()
+    @Foundation.Hal.HalProperty()
     public get id(): string { return this.$$data.id as string; }
 
-    public get tenantID(): string { return this.$$data.tenantID; }
-
+    @Foundation.Hal.HalProperty()
     public get name(): string { return this.$$data.name; }
 
+    @Foundation.Hal.HalProperty()
     public get timestamp(): Date { return this.$$data.timestamp; }
+
+    @Foundation.Hal.HalProperty()
+    public get tenantID(): string { return this.$$data.tenantID; }
 }
 
 export class ProjectCollection extends Foundation.CollectionRepresentation implements IProjectCollection {
