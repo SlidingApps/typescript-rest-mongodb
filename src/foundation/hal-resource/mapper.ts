@@ -6,8 +6,7 @@ import * as Metadata from './metadata';
 
 export class Mapper {
 
-    public map<TResource>(request: express.Request, baseUrl: string, instance: TResource): any {
-        const isHalContentType: boolean = request.header('content-type') === 'application/hal+json';
+    public map<TResource>(baseUrl: string, instance: TResource, isHalContentType = true): any {
         if (Configuration.resources.has(instance.constructor.name) && isHalContentType) {
             let resourceInfo: Metadata.ResourceInfo = Configuration.resources.get(instance.constructor.name);
             let halResource: any = { 
