@@ -4,21 +4,13 @@
   "description": "rest service using typescript-rest + mongodb",
   "scripts": {
     "clean": "rimraf dist",
-<<<<<<< Updated upstream
-    "clean:project": "npm run clean && rm -r typings && rm -r node_modules",
-=======
     "clean:project": "npm run clean && rimraf typings && rimraf node_modules",
->>>>>>> Stashed changes
     "postinstall": "npm run typings && npm run lint",
     "typings": "typings install",
     "start": "npm run build && nodemon --delay 3 ./dist/server.js",
     "build": "npm run build:dev && npm run copy-application-config",
     "build:dev": "npm run clean && tsc",
-<<<<<<< Updated upstream
-    "build:prd": "npm run clean && npm run lint && tsc",
-=======
     "build:prd": "npm run clean:project && npm install && npm run lint && tsc",
->>>>>>> Stashed changes
     "lint": "tslint ./src/**/*.ts",
     "copy-application-config": "ncp ./src/config/application-config.json ./dist/config/application-config.json"
   },
