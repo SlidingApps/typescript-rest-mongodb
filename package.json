@@ -4,13 +4,21 @@
   "description": "rest service using typescript-rest + mongodb",
   "scripts": {
     "clean": "rimraf dist",
+<<<<<<< Updated upstream
     "clean:project": "npm run clean && rm -r typings && rm -r node_modules",
+=======
+    "clean:project": "npm run clean && rimraf typings && rimraf node_modules",
+>>>>>>> Stashed changes
     "postinstall": "npm run typings && npm run lint",
     "typings": "typings install",
     "start": "npm run build && nodemon --delay 3 ./dist/server.js",
     "build": "npm run build:dev && npm run copy-application-config",
     "build:dev": "npm run clean && tsc",
+<<<<<<< Updated upstream
     "build:prd": "npm run clean && npm run lint && tsc",
+=======
+    "build:prd": "npm run clean:project && npm install && npm run lint && tsc",
+>>>>>>> Stashed changes
     "lint": "tslint ./src/**/*.ts",
     "copy-application-config": "ncp ./src/config/application-config.json ./dist/config/application-config.json"
   },
@@ -19,13 +27,13 @@
   "dependencies": {
     "express": "~4.15.0",
     "fluent-ts-validator": "^1.1.0",
+    "lodash": "~4.17.0",
     "mongoose": "~4.9.0",
     "passport": "~0.3.0",
     "passport-http": "~0.3.0",
-    "reflect-metadata": "^0.1.10",
+    "reflect-metadata": "~0.1.10",
     "typescript-ioc": "~0.4.0",
-    "typescript-rest": "~0.4.0",
-    "lodash": "~4.17.0"
+    "typescript-rest": "~0.4.0"
   },
   "devDependencies": {
     "@types/express": "^4.0.0",
