@@ -1,5 +1,6 @@
 import * as Hal from './hal-resource';
 
+export * from './api-server';
 export * from './command';
 export * from './intent'
 export * from './query';

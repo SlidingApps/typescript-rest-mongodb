@@ -1,10 +1,10 @@
 
 import * as express from 'express';
-import { ContextRequest, Path, PathParam, Return, ServiceContext, GET, PUT } from 'typescript-rest';
+import { ContextRequest, Path, PathParam, Return, GET, PUT } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import { Configuration } from '../../config/configuration';
-import * as Hal from '../../foundation/hal-resource';
+import * as Foundation from '../../foundation';
 
 import { Version } from './version';
 import { Project } from '../domain';
@@ -12,19 +12,19 @@ import { Project } from '../domain';
 @Path(`/${Version.API}/:tenantid/projects/`)
 export class ProjectController {
 
-    constructor(@Inject private service: Project.Service, @Inject private mapper: Hal.Mapper) { 
+    constructor(@Inject private service: Project.Service, @Inject private mapper: Foundation.Hal.Mapper) { 
     }
 
-    @Path('')
     @GET
+    @Path('')
     public getCollection(@PathParam('tenantid') tenantID: string): Promise<Project.Representation.IProjectCollection> {
         const query: Project.Query.ProjectByTenantID =  new Project.Query.ProjectByTenantID(tenantID);
 
         return this.service.getCollection(query);
     }
 
-    @Path('/:id')
     @GET
+    @Path('/:id')
     public get(@PathParam('tenantid') tenantID: string, @PathParam('id') projectID: string, @ContextRequest request: express.Request): Promise<Project.Representation.IProject> {
         const query: Project.Query.ProjectByID =  new Project.Query.ProjectByID(tenantID, projectID);
 
@@ -33,9 +33,9 @@ export class ProjectController {
             .then(x => this.mapper.map(Configuration.APPLICATION_CONFIG.apiBaseUrl, x, isHalContentType));
     }
 
-    @Path('')
     @PUT
-    public put(@PathParam('tenantid') tenantID: string, intent: Project.Intent.CreatePoject, @ContextRequest request: express.Request): Promise<Return.NewResource> {
+    @Path('')
+    public put(@PathParam('tenantid') tenantID: string, intent: Project.Intent.CreatePoject, @ContextRequest request: express.Request): Promise<Return.NewResource<{id: string}>> {
         const command = new Project.Command.Command<Project.Intent.CreatePoject>(tenantID, intent);
 
         return this.service.create(command)
@@ -43,7 +43,7 @@ export class ProjectController {
     }
 
     private isHalContentType(request: express.Request): boolean {
-        return !!request && !!request.header('content-type') && request.header('content-type') === 'application/hal+json';
+        return !!request && !!request.header('accept') && request.header('accept') === 'application/hal+json';
     }
 
 }
