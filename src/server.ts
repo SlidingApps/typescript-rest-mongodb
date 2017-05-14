@@ -1,26 +1,12 @@
 
-import * as express from 'express';
-import { Server } from 'typescript-rest';
-
-import { Configuration } from './config';
+import * as Foundation from './foundation';
 import { Controllers as PlatformControllers } from './platform';
 
-Server.useIoC();
-
-/* tslint:disable-next-line */
-const Controllers: any = {
-    PlatformControllers
-};
-
-const app: express.Application = express();
-Server.buildServices(app);
-
-if (Configuration.IS_PRODUCTION) {
-    /* tslint:disable-next-line */
-    console.error = function() { };
-}
-
-app.listen(3000, () => {
-    /* tslint:disable-next-line */
-    console.log('REST server listening on port 3000');
-});
+Foundation.ApiServer
+    .bootStrap()
+    .createApplication()
+    .usePassport()
+    .useAuthorizationOn('/*')
+    .registerControllers(PlatformControllers)
+    .buildServices()
+    .listen(3000);

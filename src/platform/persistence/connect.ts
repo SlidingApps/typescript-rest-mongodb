@@ -1,5 +1,4 @@
 
-
 import * as mongoose from 'mongoose';
 
 import { Configuration } from '../../config/configuration';
@@ -14,8 +13,7 @@ mongoose.connect(uri, (err) => {
     console.log(err.message);
     // tslint:disable-next-line:no-console
     console.log(err);
-  }
-  else {
+  } else {
     // tslint:disable-next-line:no-console
     console.log('Connected to MongoDb');
   }
